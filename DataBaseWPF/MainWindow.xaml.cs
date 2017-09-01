@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,37 @@ namespace DataBaseWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        TablePanel tablePanel = null;
         public MainWindow()
         {
             InitializeComponent();
+            tablePanel = new TablePanel(0);
+        }
+
+        private void bCreate_Click(object sender, RoutedEventArgs e)
+        {
+            tablePanel.Create(new Person(Int32.Parse(boxId.Text), boxFirstName.Text, boxLastName.Text, Int32.Parse(boxAge.Text)));
+        }
+
+        private void bRead_Click(object sender, RoutedEventArgs e)
+        {
+            dataGrid.ItemsSource = tablePanel.Read();
+        }
+
+        private void bUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            tablePanel.Update(new Person(Int32.Parse(boxId.Text), boxFirstName.Text, boxLastName.Text, Int32.Parse(boxAge.Text)));
+        }
+
+        private void bDelete_Click(object sender, RoutedEventArgs e)
+        {
+            tablePanel.Delete(new Person(Int32.Parse(boxId.Text), boxFirstName.Text, boxLastName.Text, Int32.Parse(boxAge.Text)));
+        }
+
+        private void SelectDB(object sender, SelectionChangedEventArgs e)
+        {
+            tablePanel = new TablePanel(SQLSwitcher.SelectedIndex);
+            tablePanel.ClearTable(dataGrid);
         }
     }
 }

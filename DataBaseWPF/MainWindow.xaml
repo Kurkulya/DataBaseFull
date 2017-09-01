@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="219" Margin="10,10,0,0" VerticalAlignment="Top" Width="400"/>
+        <TextBox x:Name="boxId" HorizontalAlignment="Left" Height="23" Margin="10,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+        <TextBox x:Name="boxFirstName" HorizontalAlignment="Left" Height="23" Margin="85,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="125"/>
+        <TextBox x:Name="boxLastName" HorizontalAlignment="Left" Height="23" Margin="215,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="boxAge" HorizontalAlignment="Left" Height="23" Margin="340,234,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70"/>
+        <Label Content="Id" HorizontalAlignment="Left" Margin="35,257,0,0" VerticalAlignment="Top"/>
+        <Label Content="First Name" HorizontalAlignment="Left" Margin="112,257,0,0" VerticalAlignment="Top"/>
+        <Label Content="Last Name" HorizontalAlignment="Left" Margin="242,257,0,0" VerticalAlignment="Top"/>
+        <Label Content="Age" HorizontalAlignment="Left" Margin="359,257,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="bCreate" Content="Create" HorizontalAlignment="Left" Margin="10,288,0,0" VerticalAlignment="Top" Width="95" Click="bCreate_Click"/>
+        <Button x:Name="bRead" Content="Read" HorizontalAlignment="Left" Margin="112,288,0,0" VerticalAlignment="Top" Width="95" Click="bRead_Click"/>
+        <Button x:Name="bUpdate" Content="Update" HorizontalAlignment="Left" Margin="213,288,0,0" VerticalAlignment="Top" Width="95" Click="bUpdate_Click"/>
+        <Button x:Name="bDelete" Content="Delete" HorizontalAlignment="Left" Margin="315,288,0,0" VerticalAlignment="Top" Width="95" Click="bDelete_Click"/>
+        <ComboBox x:Name="SQLSwitcher" HorizontalAlignment="Left" Margin="415,10,0,0" VerticalAlignment="Top" Width="92" SelectionChanged="SelectDB">
+            <ComboBoxItem Content="Ms SQL"/>
+            <ComboBoxItem Content="My SQL"/>
+            <ComboBoxItem Content="H2"/>
+        </ComboBox>
+
     </Grid>
 </Window>
