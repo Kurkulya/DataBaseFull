@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBaseWPF
+namespace DataBaseApi
 {
-    class PersonMySQL : IPersonDAO
+    class PersonDAOMySQL : IPersonDAO
     {
         MySqlConnection connection = null;
         string tableName = "";
-        public PersonMySQL()
+        public PersonDAOMySQL()
         {
             string MySQLconnString = @"Server=localhost;" +
                                      @"Database=bisser;" +

@@ -1,24 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataBaseApi;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace DataBaseWPF
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         TablePanel tablePanel = null;
@@ -30,7 +17,7 @@ namespace DataBaseWPF
 
         private void bCreate_Click(object sender, RoutedEventArgs e)
         {
-            tablePanel.Create(new Person(Int32.Parse(boxId.Text), boxFirstName.Text, boxLastName.Text, Int32.Parse(boxAge.Text)));
+            tablePanel.Create(GetPerson());
         }
 
         private void bRead_Click(object sender, RoutedEventArgs e)
@@ -40,18 +27,27 @@ namespace DataBaseWPF
 
         private void bUpdate_Click(object sender, RoutedEventArgs e)
         {
-            tablePanel.Update(new Person(Int32.Parse(boxId.Text), boxFirstName.Text, boxLastName.Text, Int32.Parse(boxAge.Text)));
+            tablePanel.Update(GetPerson());
         }
 
         private void bDelete_Click(object sender, RoutedEventArgs e)
         {
-            tablePanel.Delete(new Person(Int32.Parse(boxId.Text), boxFirstName.Text, boxLastName.Text, Int32.Parse(boxAge.Text)));
+            tablePanel.Delete(GetPerson());
         }
 
         private void SelectDB(object sender, SelectionChangedEventArgs e)
         {
             tablePanel = new TablePanel(SQLSwitcher.SelectedIndex);
             tablePanel.ClearTable(dataGrid);
+        }
+
+        private Person GetPerson()
+        {
+            int id = Int32.Parse(boxId.Text);
+            string fn = boxFirstName.Text;
+            string ln = boxLastName.Text;
+            int age = Int32.Parse(boxAge.Text);
+            return new Person(id, fn, ln, age);
         }
     }
 }

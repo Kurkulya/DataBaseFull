@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataBaseWPF
+namespace DataBaseApi
 {
-    public class DBImpl
+    public class DBFactory
     {
         public static IPersonDAO GetInstance(int type)
         {
@@ -14,9 +14,9 @@ namespace DataBaseWPF
 
             switch(type)
             {
-                case 0: db = new PersonMsSQL(); break;
-                case 1: db = new PersonMySQL(); break;
-                //case "H2": db = new PersonH2(); break;
+                case 0: db = new PersonDAOMsSQL(); break;
+                case 1: db = new PersonDAOMySQL(); break;
+                case 2: db = new PersonDAOH2(); break;
             }
 
             return db;

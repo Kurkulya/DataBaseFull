@@ -1,31 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.H2;
 
-namespace DataBaseWPF
+namespace DataBaseApi
 {
-    class PersonMsSQL : IPersonDAO
+    class PersonDAOH2 : IPersonDAO
     {
-        SqlConnection connection = null;
+        H2Connection connection = null;
         string tableName = "";
-        public PersonMsSQL()
+        public PersonDAOH2()
         {
-            string strConn = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
-                             @"AttachDbFilename=E:\C# 1708\DataBaseWPF\DataBaseWPF\DataBase\LocalDB.mdf;" +
-                             @"Integrated Security=True";
+            string connectionH2 = "jdbc:h2:tcp://localhost/~/test";
+            string user = "sa";
+            string pass = "";
 
             tableName = "person";
-            connection = new SqlConnection(strConn);
+
+            connection = new H2Connection(connectionH2, user, pass);
         }
+
 
         public void Create(Person person)
         {
             connection.Open();
 
-            SqlCommand cmd = new SqlCommand(
+            H2Command cmd = new H2Command(
                 $"INSERT INTO [{tableName}] (Id, FirstName, LastName, Age) " +
                 $"VALUES ({person.Id}, '{person.FirstName}', '{person.LastName}', {person.Age})", connection);
             cmd.ExecuteNonQuery();
@@ -37,7 +40,7 @@ namespace DataBaseWPF
         {
             connection.Open();
 
-            SqlCommand cmd = new SqlCommand(
+            H2Command cmd = new H2Command(
                 $"Delete FROM [{tableName}] " +
                 $"WHERE Id = {person.Id};", connection);
             cmd.ExecuteNonQuery();
@@ -47,15 +50,16 @@ namespace DataBaseWPF
 
         public List<Person> Read()
         {
+
             List<Person> listPerson = new List<Person>();
 
             connection.Open();
-            SqlCommand cmd = new SqlCommand($"SELECT * FROM [{tableName}];", connection);
-            SqlDataReader reader = cmd.ExecuteReader();
+            H2Command cmd = new H2Command($"SELECT * FROM [{tableName}];", connection);
+            H2DataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-                listPerson.Add(new Person(reader.GetInt32(0),reader.GetString(1),reader.GetString(2),reader.GetInt32(3)));
+                listPerson.Add(new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
             }
             reader.Close();
 
@@ -67,7 +71,7 @@ namespace DataBaseWPF
         {
             connection.Open();
 
-            SqlCommand cmd = new SqlCommand(
+            H2Command cmd = new H2Command(
                 $"UPDATE [{tableName}] " +
                 $"SET FirstName = '{person.FirstName}', LastName='{person.LastName}', Age={person.Age} " +
                 $"WHERE Id = {person.Id};", connection);

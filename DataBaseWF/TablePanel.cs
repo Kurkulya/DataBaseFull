@@ -1,21 +1,21 @@
-﻿using System;
+﻿using DataBaseApi;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.Windows.Forms;
 
-namespace DataBaseWPF
+namespace DataBaseWF
 {
-    public class TablePanel : ObservableCollection<Person>
+    public class TablePanel
     {
         IPersonDAO db = null;
 
         public TablePanel(int type)
         {
-            db = DBImpl.GetInstance(type);
+            db = DBFactory.GetInstance(type);
         }
 
         public void Create(Person person)
@@ -28,7 +28,7 @@ namespace DataBaseWPF
             db.Delete(person);
         }
 
-        public List<Person> Read()
+        public DataTable Read()
         {
             DataTable dataTable = new DataTable();
             dataTable.Clear();
@@ -48,7 +48,8 @@ namespace DataBaseWPF
                 dr.SetField(3, person.Age);
                 dataTable.Rows.Add(dr);
             }
-            return listPerson;
+
+            return dataTable;
         }
 
         public void Update(Person person)
@@ -56,9 +57,10 @@ namespace DataBaseWPF
             db.Update(person);
         }
 
-        public void ClearTable(DataGrid dgv)
+        public void ClearTable(DataGridView dgv)
         {
-            dgv.ItemsSource = null;
+            dgv.DataSource = new DataTable();
         }
+
     }
 }

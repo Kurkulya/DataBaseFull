@@ -1,4 +1,4 @@
-﻿namespace DataBaseWPF
+﻿namespace DataBaseApi
 {
     public class Person
     {
