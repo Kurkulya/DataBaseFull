@@ -13,46 +13,24 @@ namespace DataBaseWF
 {
     public partial class Form1 : Form
     {
-        TablePanel tablePanel = null;
+        DataGridViewFormer dgFormer;
+        PersonDAO dao;
         public Form1()
         {
             InitializeComponent();
-            tablePanel = new TablePanel(0);
+            dgFormer = new DataGridViewFormer(dataGridMany);
+            dgFormer.FormTable();
+
+            databaseComboBox.Items.Add("MOCK");           
+            dao = new PersonDAO("MOCK");
+            databaseComboBox.SelectedIndex = 0;
+            //dataGridMany.DataSource = dao.Read();
+            dgFormer.AddRows(dao.Read());
         }
 
-        private void bDelete_Click(object sender, EventArgs e)
+        private void DatabaseSelected(object sender, EventArgs e)
         {
-            tablePanel.Delete(GetPerson());
-        }
-
-        private void bUpdate_Click(object sender, EventArgs e)
-        {
-            tablePanel.Update(GetPerson());
-        }
-
-        private void bRead_Click(object sender, EventArgs e)
-        {
-            dataGrid.DataSource = tablePanel.Read();
-        }
-
-        private void bCreate_Click(object sender, EventArgs e)
-        {
-            tablePanel.Create(GetPerson());
-        }
-
-        private void SQLSwitcher_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            tablePanel = new TablePanel(SQLSwitcher.SelectedIndex);
-            tablePanel.ClearTable(dataGrid);
-        }
-
-        private Person GetPerson()
-        {
-            int id = Int32.Parse(boxId.Text);
-            string fn = boxFirstName.Text;
-            string ln = boxLastName.Text;
-            int age = Int32.Parse(boxAge.Text);
-            return new Person(id, fn, ln, age);
+            dao.SetDataBase(databaseComboBox.SelectedItem.ToString());
         }
     }
 }

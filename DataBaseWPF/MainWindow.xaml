@@ -21,9 +21,6 @@
         <Button x:Name="bUpdate" Content="Update" HorizontalAlignment="Left" Margin="213,288,0,0" VerticalAlignment="Top" Width="95" Click="bUpdate_Click"/>
         <Button x:Name="bDelete" Content="Delete" HorizontalAlignment="Left" Margin="315,288,0,0" VerticalAlignment="Top" Width="95" Click="bDelete_Click"/>
         <ComboBox x:Name="SQLSwitcher" HorizontalAlignment="Left" Margin="415,10,0,0" VerticalAlignment="Top" Width="92" SelectionChanged="SelectDB" SelectedIndex="0">
-            <ComboBoxItem Content="Ms SQL"/>
-            <ComboBoxItem Content="My SQL"/>
-            <ComboBoxItem Content="H2"/>
         </ComboBox>
 
     </Grid>

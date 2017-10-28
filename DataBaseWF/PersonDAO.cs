@@ -5,17 +5,22 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.Windows.Forms;
 
-namespace DataBaseWPF
+namespace DataBaseWF
 {
-    public class TablePanel
+    public class PersonDAO
     {
         IPersonDAO db = null;
 
-        public TablePanel(string type)
+        public void SetDataBase(string type)
         {
             db = DBFactory.GetInstance(type);
+        }
+  
+        public PersonDAO(string type)
+        {
+            SetDataBase(type);
         }
 
         public void Create(Person person)
@@ -36,11 +41,6 @@ namespace DataBaseWPF
         public void Update(Person person)
         {
             db.Update(person);
-        }
-
-        public void ClearTable(DataGrid dgv)
-        {
-            dgv.ItemsSource = null;
         }
     }
 }

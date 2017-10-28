@@ -1,5 +1,6 @@
 ﻿using DataBaseApi;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,7 +13,13 @@ namespace DataBaseWPF
         public MainWindow()
         {
             InitializeComponent();
-            tablePanel = new TablePanel(0);
+            string[] types = {"MS SQL", "MY SQL", "H2", "MONGODB", "CSV", "CSV_L", "JSON", "JSON_L", "XML", "XML_L", "YAML", "YAML_L", "BIN", "BIN_L", "MS SQL EF" };
+
+            foreach(string t in types)
+            {
+                SQLSwitcher.Items.Add(t);
+            }
+            tablePanel = new TablePanel("MS SQL");
         }
 
         private void bCreate_Click(object sender, RoutedEventArgs e)
@@ -37,7 +44,7 @@ namespace DataBaseWPF
 
         private void SelectDB(object sender, SelectionChangedEventArgs e)
         {
-            tablePanel = new TablePanel(SQLSwitcher.SelectedIndex);
+            tablePanel = new TablePanel(SQLSwitcher.SelectedItem.ToString());
             tablePanel.ClearTable(dataGrid);
         }
 

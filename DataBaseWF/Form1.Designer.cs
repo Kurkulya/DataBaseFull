@@ -28,191 +28,80 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGrid = new System.Windows.Forms.DataGridView();
-            this.boxId = new System.Windows.Forms.TextBox();
-            this.boxFirstName = new System.Windows.Forms.TextBox();
-            this.boxLastName = new System.Windows.Forms.TextBox();
-            this.boxAge = new System.Windows.Forms.TextBox();
-            this.bCreate = new System.Windows.Forms.Button();
-            this.bRead = new System.Windows.Forms.Button();
-            this.bUpdate = new System.Windows.Forms.Button();
-            this.bDelete = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.SQLSwitcher = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
+            this.createButton = new System.Windows.Forms.Button();
+            this.databaseComboBox = new System.Windows.Forms.ComboBox();
+            this.dataGridMany = new System.Windows.Forms.DataGridView();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.searchButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMany)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGrid
+            // createButton
             // 
-            this.dataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid.Location = new System.Drawing.Point(3, 3);
-            this.dataGrid.Name = "dataGrid";
-            this.dataGrid.Size = new System.Drawing.Size(418, 310);
-            this.dataGrid.TabIndex = 0;
+            this.createButton.Location = new System.Drawing.Point(12, 487);
+            this.createButton.Name = "createButton";
+            this.createButton.Size = new System.Drawing.Size(100, 23);
+            this.createButton.TabIndex = 5;
+            this.createButton.Text = "Create";
+            this.createButton.UseVisualStyleBackColor = true;
             // 
-            // boxId
+            // databaseComboBox
             // 
-            this.boxId.Location = new System.Drawing.Point(3, 319);
-            this.boxId.Name = "boxId";
-            this.boxId.Size = new System.Drawing.Size(100, 20);
-            this.boxId.TabIndex = 1;
+            this.databaseComboBox.FormattingEnabled = true;
+            this.databaseComboBox.Location = new System.Drawing.Point(361, 489);
+            this.databaseComboBox.Name = "databaseComboBox";
+            this.databaseComboBox.Size = new System.Drawing.Size(110, 21);
+            this.databaseComboBox.TabIndex = 13;
+            this.databaseComboBox.SelectedIndexChanged += new System.EventHandler(this.DatabaseSelected);
             // 
-            // boxFirstName
+            // dataGridMany
             // 
-            this.boxFirstName.Location = new System.Drawing.Point(109, 319);
-            this.boxFirstName.Name = "boxFirstName";
-            this.boxFirstName.Size = new System.Drawing.Size(100, 20);
-            this.boxFirstName.TabIndex = 2;
+            this.dataGridMany.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridMany.Location = new System.Drawing.Point(12, 50);
+            this.dataGridMany.Name = "dataGridMany";
+            this.dataGridMany.Size = new System.Drawing.Size(459, 431);
+            this.dataGridMany.TabIndex = 14;
             // 
-            // boxLastName
+            // searchTextBox
             // 
-            this.boxLastName.Location = new System.Drawing.Point(215, 319);
-            this.boxLastName.Name = "boxLastName";
-            this.boxLastName.Size = new System.Drawing.Size(100, 20);
-            this.boxLastName.TabIndex = 3;
+            this.searchTextBox.Location = new System.Drawing.Point(12, 12);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(395, 20);
+            this.searchTextBox.TabIndex = 15;
             // 
-            // boxAge
+            // searchButton
             // 
-            this.boxAge.Location = new System.Drawing.Point(321, 319);
-            this.boxAge.Name = "boxAge";
-            this.boxAge.Size = new System.Drawing.Size(100, 20);
-            this.boxAge.TabIndex = 4;
-            // 
-            // bCreate
-            // 
-            this.bCreate.Location = new System.Drawing.Point(3, 367);
-            this.bCreate.Name = "bCreate";
-            this.bCreate.Size = new System.Drawing.Size(100, 23);
-            this.bCreate.TabIndex = 5;
-            this.bCreate.Text = "Create";
-            this.bCreate.UseVisualStyleBackColor = true;
-            this.bCreate.Click += new System.EventHandler(this.bCreate_Click);
-            // 
-            // bRead
-            // 
-            this.bRead.Location = new System.Drawing.Point(109, 367);
-            this.bRead.Name = "bRead";
-            this.bRead.Size = new System.Drawing.Size(100, 23);
-            this.bRead.TabIndex = 6;
-            this.bRead.Text = "Read";
-            this.bRead.UseVisualStyleBackColor = true;
-            this.bRead.Click += new System.EventHandler(this.bRead_Click);
-            // 
-            // bUpdate
-            // 
-            this.bUpdate.Location = new System.Drawing.Point(215, 367);
-            this.bUpdate.Name = "bUpdate";
-            this.bUpdate.Size = new System.Drawing.Size(100, 23);
-            this.bUpdate.TabIndex = 7;
-            this.bUpdate.Text = "Update";
-            this.bUpdate.UseVisualStyleBackColor = true;
-            this.bUpdate.Click += new System.EventHandler(this.bUpdate_Click);
-            // 
-            // bDelete
-            // 
-            this.bDelete.Location = new System.Drawing.Point(321, 367);
-            this.bDelete.Name = "bDelete";
-            this.bDelete.Size = new System.Drawing.Size(100, 23);
-            this.bDelete.TabIndex = 8;
-            this.bDelete.Text = "Delete";
-            this.bDelete.UseVisualStyleBackColor = true;
-            this.bDelete.Click += new System.EventHandler(this.bDelete_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 342);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(16, 13);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Id";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(132, 342);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 13);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "FirstName";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(239, 342);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "LastName";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(356, 342);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(26, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Age";
-            // 
-            // SQLSwitcher
-            // 
-            this.SQLSwitcher.FormattingEnabled = true;
-            this.SQLSwitcher.Items.AddRange(new object[] {
-            "Ms SQL",
-            "My SQL",
-            "H2"});
-            this.SQLSwitcher.Location = new System.Drawing.Point(427, 12);
-            this.SQLSwitcher.Name = "SQLSwitcher";
-            this.SQLSwitcher.Size = new System.Drawing.Size(110, 21);
-            this.SQLSwitcher.TabIndex = 13;
-            this.SQLSwitcher.SelectedIndexChanged += new System.EventHandler(this.SQLSwitcher_SelectedIndexChanged);
+            this.searchButton.Location = new System.Drawing.Point(413, 10);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(58, 23);
+            this.searchButton.TabIndex = 16;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 403);
-            this.Controls.Add(this.SQLSwitcher);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.bDelete);
-            this.Controls.Add(this.bUpdate);
-            this.Controls.Add(this.bRead);
-            this.Controls.Add(this.bCreate);
-            this.Controls.Add(this.boxAge);
-            this.Controls.Add(this.boxLastName);
-            this.Controls.Add(this.boxFirstName);
-            this.Controls.Add(this.boxId);
-            this.Controls.Add(this.dataGrid);
+            this.ClientSize = new System.Drawing.Size(483, 522);
+            this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.searchTextBox);
+            this.Controls.Add(this.dataGridMany);
+            this.Controls.Add(this.databaseComboBox);
+            this.Controls.Add(this.createButton);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridMany)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGrid;
-        private System.Windows.Forms.TextBox boxId;
-        private System.Windows.Forms.TextBox boxFirstName;
-        private System.Windows.Forms.TextBox boxLastName;
-        private System.Windows.Forms.TextBox boxAge;
-        private System.Windows.Forms.Button bCreate;
-        private System.Windows.Forms.Button bRead;
-        private System.Windows.Forms.Button bUpdate;
-        private System.Windows.Forms.Button bDelete;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox SQLSwitcher;
+        private System.Windows.Forms.Button createButton;
+        private System.Windows.Forms.ComboBox databaseComboBox;
+        private System.Windows.Forms.DataGridView dataGridMany;
+        private System.Windows.Forms.TextBox searchTextBox;
+        private System.Windows.Forms.Button searchButton;
     }
 }
 
