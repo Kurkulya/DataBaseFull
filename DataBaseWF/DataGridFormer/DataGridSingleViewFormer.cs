@@ -34,7 +34,7 @@ namespace DataBaseWF
                     DataGridViewRow row = dataGrid.Rows[e.RowIndex];
                     if (buttonCell.Text == deleteColumnText)
                     {
-                        Dao.DeletePhone(Person, new Phone((string)row.Cells["phone"].Value));
+                        Dao.DeletePhone(Person, Person.Phones[e.RowIndex]);
                         UpdateTable();
                     }
                     else if (buttonCell.Text == editColumnText)
@@ -70,6 +70,7 @@ namespace DataBaseWF
 
         public void UpdateTable()
         {
+            Person = Dao.ReadPerson(Person.Id);
             List<Phone> phones = Dao.ReadPerson(Person.Id).Phones;
 
             if (phones == null)

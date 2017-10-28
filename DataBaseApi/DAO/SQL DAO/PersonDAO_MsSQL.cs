@@ -14,7 +14,7 @@ namespace DataBaseApi
         public PersonDAO_MsSQL()
         {
             string strConn = @"Data Source=(LocalDB)\MSSQLLocalDB;" +
-                             @"AttachDbFilename=E:\C# 1708\DataBase\DataBaseApi\DataBase\LocalDB.mdf;" +
+                             @"AttachDbFilename=E:\ORT_1708\C#\Data Bases\DataBase\DataBaseApi\DataBase\LocalDB.mdf;" +
                              @"Integrated Security=True";
 
             connection = new SqlConnection(strConn);
@@ -36,18 +36,32 @@ namespace DataBaseApi
             sqlCmd.ExecuteNonQuery();
         }
 
-        protected override List<Person> ReadData(string cmd)
+        protected override List<Person> ReadData(string cmdPerson)
         {
-            SqlCommand sqlCmd = new SqlCommand(cmd, connection);
-            SqlDataReader reader = sqlCmd.ExecuteReader();
+            SqlCommand personSql = new SqlCommand(cmdPerson, connection);
+            SqlDataReader personReader = personSql.ExecuteReader();
 
             List<Person> listPerson = new List<Person>();
-            while (reader.Read())
+            while (personReader.Read())
             {
-                listPerson.Add(new Person(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3)));
+                listPerson.Add(new Person(personReader.GetInt32(0), personReader.GetString(1), personReader.GetString(2), personReader.GetInt32(3)));
             }
-            reader.Close();
+            personReader.Close();
             return listPerson;
+        }
+
+        protected override List<Phone> ReadPhones(string cmdPhone)
+        {
+            SqlCommand phoneSql = new SqlCommand(cmdPhone, connection);
+            SqlDataReader phoneReader = phoneSql.ExecuteReader();
+
+            List<Phone> phones = new List<Phone>();
+            while (phoneReader.Read())
+            {
+                phones.Add(new Phone(phoneReader.GetInt32(0), phoneReader.GetString(1)));
+            }
+            phoneReader.Close();
+            return phones;
         }
     }
 }

@@ -32,6 +32,18 @@ namespace DataBaseApi
             return listPerson;
         }
 
+        protected override List<Phone> ReadPhones(string cmdPhone)
+        {
+            ResultSet rs = state.executeQuery(cmdPhone);
+            List<Phone> phones = new List<Phone>();
+            while (rs.next())
+            {
+                phones.Add(new Phone(rs.getInt("ID"), rs.getString("PHONE")));
+            }
+            rs.close();
+            return phones;
+        }
+
 
         protected override void CloseConnection()
         {

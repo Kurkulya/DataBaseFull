@@ -14,7 +14,7 @@ namespace DataBaseApi
 
             switch(type)
             {
-                //case "MS SQL": db = new PersonDAO_MsSQL(); break;
+                case "MS SQL": db = new PersonDAO_MsSQL(); break;
                 //case "MY SQL": db = new PersonDAO_MySQL(); break;
                 //case "H2": db = new PersonDAO_H2(); break;
                 //case "MONGODB": db = new PersonDAO_MONGODB(); break;

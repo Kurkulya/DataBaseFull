@@ -52,5 +52,19 @@ namespace DataBaseApi
             reader.Close();
             return listPerson;
         }
+
+        protected override List<Phone> ReadPhones(string cmdPhone)
+        {
+            MySqlCommand phoneSql = new MySqlCommand(cmdPhone, connection);
+            MySqlDataReader phoneReader = phoneSql.ExecuteReader();
+
+            List<Phone> phones = new List<Phone>();
+            while (phoneReader.Read())
+            {
+                phones.Add(new Phone(phoneReader.GetInt32(0), phoneReader.GetString(1)));
+            }
+            phoneReader.Close();
+            return phones;
+        }
     }
 }

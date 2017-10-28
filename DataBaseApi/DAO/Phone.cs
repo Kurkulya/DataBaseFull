@@ -16,5 +16,11 @@ namespace DataBaseApi
         {
             Number = number;
         }
+
+        public Phone(int id, string number)
+        {
+            Id = id;
+            Number = number;
+        }
     }
 }

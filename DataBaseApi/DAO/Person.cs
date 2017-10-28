@@ -18,16 +18,17 @@ namespace DataBaseApi
         public int Age { get; set; }
         public List<Phone> Phones { get; set; }
 
-        public Person(int Id, string FirstName, string LastName, int Age)
+       public Person(int Id, string FirstName, string LastName, int Age)
         {
             Init(Id, FirstName, LastName, Age);
         }
         public Person()
         {
-
+            Phones = new List<Phone>();
         }
         public void Init(int Id, string FirstName, string LastName, int Age)
         {
+            Phones = new List<Phone>();
             this.Id = Id;
             this.FirstName = FirstName;
             this.LastName = LastName;

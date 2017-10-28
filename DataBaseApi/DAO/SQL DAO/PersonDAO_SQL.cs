@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace DataBaseApi.Api.LibraryFiles_DAO
 {
-    abstract public class PersonDAO_SQL : IPersonDAO
+    abstract public class PersonDAO_SQL : IPersonPhoneDAO
     {
         protected string tableName = "";
+        protected string phoneTable = "";
 
         public PersonDAO_SQL()
         {
             tableName = "person";
+            phoneTable = "phones";
         }
 
         public void Create(Person person)
@@ -29,6 +31,10 @@ namespace DataBaseApi.Api.LibraryFiles_DAO
         {
             OpenConnection();
             string cmd =
+                $"Delete FROM {phoneTable} " +
+                $"WHERE Person_Id = {person.Id};";
+            ExecuteCommand(cmd);
+            cmd =
                 $"Delete FROM {tableName} " +
                 $"WHERE Id = {person.Id};";
             ExecuteCommand(cmd);
@@ -58,7 +64,49 @@ namespace DataBaseApi.Api.LibraryFiles_DAO
         abstract protected void CloseConnection();
         abstract protected void OpenConnection();
         abstract protected void ExecuteCommand(string cmd);
-        abstract protected List<Person> ReadData(string cmd);
+        abstract protected List<Person> ReadData(string cmdPerson);
+        abstract protected List<Phone> ReadPhones(string cmdPhone);
 
+        public Person ReadById(int id)
+        {
+            OpenConnection();
+            string cmdPerson = $"SELECT * FROM {tableName} WHERE Id={id}";
+            string cmdPhone = $"SELECT * FROM {phoneTable} WHERE Person_Id={id}";
+            Person person = ReadData(cmdPerson).First();
+            person.Phones = ReadPhones(cmdPhone);
+            CloseConnection();
+            return person;
+        }
+
+        public void UpdatePhone(Person person, Phone phone)
+        {
+            OpenConnection();
+            string cmd =
+                $"UPDATE {phoneTable} " +
+                $"SET Phone = '{phone.Number}' " +
+                $"WHERE Id = {phone.Id};";
+            ExecuteCommand(cmd);
+            CloseConnection();
+        }
+
+        public void DeletePhone(Person person, Phone phone)
+        {
+            OpenConnection();
+            string cmd =
+                $"Delete FROM {phoneTable} " +
+                $"WHERE Id = {phone.Id};";
+            ExecuteCommand(cmd);
+            CloseConnection();
+        }
+
+        public void AddPhone(Person person, Phone phone)
+        {
+            OpenConnection();
+            string cmd =
+                $"INSERT INTO {phoneTable} (Phone, Person_Id) " +
+                $"VALUES ('{phone.Number}', {person.Id})";
+            ExecuteCommand(cmd);
+            CloseConnection();
+        }
     }
 }

@@ -22,7 +22,12 @@ namespace DataBaseWF
             dgFormer.FormTable();
             dgFormer.UpdateTable();
 
-            databaseComboBox.Items.Add("MOCK");           
+            string[] databases = { "MOCK", "MS SQL" };
+            foreach(string db in databases)
+            {
+                databaseComboBox.Items.Add(db);
+            }
+                     
             databaseComboBox.SelectedIndex = 0;
 
             
@@ -31,6 +36,7 @@ namespace DataBaseWF
         private void DatabaseSelected(object sender, EventArgs e)
         {
             DataGridManyViewFormer.Dao.SetDataBase(databaseComboBox.SelectedItem.ToString());
+            dgFormer.UpdateTable();
         }
 
         private void createButton_Click(object sender, EventArgs e)

@@ -11,7 +11,7 @@ namespace DataBaseWPF
 {
     public class TablePanel
     {
-        IPersonDAO db = null;
+        IPersonPhoneDAO db = null;
 
         public TablePanel(string type)
         {
