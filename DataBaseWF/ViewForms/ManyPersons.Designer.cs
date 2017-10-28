@@ -1,6 +1,6 @@
 ﻿namespace DataBaseWF
 {
-    partial class Form1
+    partial class ManyPersons
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -44,6 +44,7 @@
             this.createButton.TabIndex = 5;
             this.createButton.Text = "Create";
             this.createButton.UseVisualStyleBackColor = true;
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // databaseComboBox
             // 
@@ -78,17 +79,17 @@
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // ManyPersons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 522);
+            this.ClientSize = new System.Drawing.Size(483, 524);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.dataGridMany);
             this.Controls.Add(this.databaseComboBox);
             this.Controls.Add(this.createButton);
-            this.Name = "Form1";
+            this.Name = "ManyPersons";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMany)).EndInit();
             this.ResumeLayout(false);

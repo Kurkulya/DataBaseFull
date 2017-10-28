@@ -186,6 +186,7 @@
     <Compile Include="DAO\SQL DAO\PersonDAO_H2.cs" />
     <Compile Include="DAO\SQL DAO\PersonDAO_MsSQL.cs" />
     <Compile Include="DAO\SQL DAO\PersonDAO_MySQL.cs" />
+    <Compile Include="DAO\Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

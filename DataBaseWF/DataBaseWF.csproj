@@ -52,18 +52,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataGridViewFormer.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="DataGridFormer\DataGridSingleViewFormer.cs" />
+    <Compile Include="DataGridFormer\DataGridManyViewFormer.cs" />
+    <Compile Include="DataGridFormer\DataGridViewFormer.cs" />
+    <Compile Include="InputForms\CreatePersonForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="InputForms\CreatePersonForm.Designer.cs">
+      <DependentUpon>CreatePersonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputForms\UpdatePhoneForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputForms\UpdatePhoneForm.Designer.cs">
+      <DependentUpon>UpdatePhoneForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewForms\ManyPersons.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewForms\ManyPersons.Designer.cs">
+      <DependentUpon>ManyPersons.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PersonDAO.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ViewForms\SinglePerson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewForms\SinglePerson.Designer.cs">
+      <DependentUpon>SinglePerson.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="InputForms\CreatePersonForm.resx">
+      <DependentUpon>CreatePersonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputForms\UpdatePhoneForm.resx">
+      <DependentUpon>UpdatePhoneForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewForms\ManyPersons.resx">
+      <DependentUpon>ManyPersons.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -74,6 +100,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ViewForms\SinglePerson.resx">
+      <DependentUpon>SinglePerson.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

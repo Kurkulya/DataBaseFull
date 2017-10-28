@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace DataBaseApi
 {
-    class PersonDAO_Mock : IPersonDAO
+    class PersonDAO_Mock : IPersonPhoneDAO
     {
         private class Data
         {
             public string fn;
             public string ln;
             public int age;
+            public List<Phone> phones;
 
             public Data()
             {
@@ -20,6 +21,7 @@ namespace DataBaseApi
 
             public Data(string fn, string ln, int age)
             {
+                phones = new List<Phone>();
                 this.fn = fn;
                 this.ln = ln;
                 this.age = age;
@@ -63,7 +65,32 @@ namespace DataBaseApi
 
         public void Update(Person p)
         {
+            List<Phone> phones = people[p.Id].phones;
             people[p.Id] = new Data(p.FirstName, p.LastName, p.Age);
+            people[p.Id].phones = phones;
+        }
+
+        public Person ReadById(int id)
+        {
+            Person person = new Person(id, people[id].fn, people[id].ln, people[id].age);
+            person.Phones = people[id].phones;
+            return person;
+        }
+
+        public void UpdatePhone(Person person, Phone phone)
+        {
+            people[person.Id].phones.FirstOrDefault(x => x.Id == phone.Id).Number = phone.Number;
+        }
+
+        public void DeletePhone(Person person, Phone phone)
+        {
+            people[person.Id].phones.RemoveAll(x => x.Number == phone.Number);
+        }
+
+        public void AddPhone(Person person, Phone phone)
+        {
+            phone.Id = people[person.Id].phones.Count;
+            people[person.Id].phones.Add(phone);
         }
     }
 }

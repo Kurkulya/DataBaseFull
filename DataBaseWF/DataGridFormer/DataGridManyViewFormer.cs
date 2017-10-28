@@ -8,15 +8,13 @@ using System.Windows.Forms;
 
 namespace DataBaseWF
 {
-    class DataGridViewFormer
+    class DataGridManyViewFormer : DataGridViewFormer
     {
         DataGridView dataGrid;
         string deleteColumnText = "X";
         string editColumnText = "->";
 
-        enum Width {Small = 35, Medium = 60, Large = 100 }
-
-        public DataGridViewFormer(DataGridView dataGrid)
+        public DataGridManyViewFormer(DataGridView dataGrid) : base(dataGrid)
         {
             this.dataGrid = dataGrid;
             dataGrid.AllowUserToAddRows = false;
@@ -30,12 +28,27 @@ namespace DataBaseWF
                 if (dataGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn)
                 {
                     DataGridViewButtonColumn buttonCell = dataGrid.Columns[e.ColumnIndex] as DataGridViewButtonColumn;
+                    DataGridViewRow row = dataGrid.Rows[e.RowIndex];
                     if (buttonCell.Text == deleteColumnText)
-                        MessageBox.Show("Delete");
+                    {
+                        Dao.Delete(new Person((int)row.Cells["id"].Value, (string)row.Cells["fn"].Value,
+                            (string)row.Cells["ln"].Value, (int)row.Cells["age"].Value));
+                        UpdateTable();
+                    }
                     else if (buttonCell.Text == editColumnText)
-                        MessageBox.Show("Edit");
+                    {                       
+                        SinglePerson singleForm = new SinglePerson((int)row.Cells["id"].Value);
+                        singleForm.ShowDialog();
+                        UpdateTable();
+                    }
                 }
             }
+        }
+
+        internal void CreatePerson(Person person)
+        {
+            Dao.Create(person);
+            UpdateTable();
         }
 
         public void FormTable()
@@ -47,33 +60,16 @@ namespace DataBaseWF
             AddButtonColumn(editColumnText, Width.Small);
             AddButtonColumn(deleteColumnText, Width.Small);       
         }
-
-
-        private void AddTextColumn(string name, string text, Width width)
+        public void UpdateTable()
         {
-            DataGridViewColumn column = new DataGridViewColumn();
-            column.Name = name;
-            column.Width = (int)width;
-            column.HeaderText = text;
-            column.CellTemplate = new DataGridViewTextBoxCell();
-            dataGrid.Columns.Add(column);
-        }
-
-        private void AddButtonColumn(string text, Width width)
-        {
-            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();       
-            btn.Width = (int)width;
-            btn.Text = text;
-            btn.UseColumnTextForButtonValue = true;
-            dataGrid.Columns.Add(btn);
-        }
-
-        public void AddRows(List<Person> people)
-        {
+            List<Person> people = Dao.Read();
+            dataGrid.Rows.Clear();
             foreach (Person person in people)
             {
                 dataGrid.Rows.Add(person.Id, person.FirstName, person.LastName, person.Age);
             }
         }
+
+
     }
 }

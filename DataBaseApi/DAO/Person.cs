@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,6 +16,8 @@ namespace DataBaseApi
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
+        public List<Phone> Phones { get; set; }
+
         public Person(int Id, string FirstName, string LastName, int Age)
         {
             Init(Id, FirstName, LastName, Age);

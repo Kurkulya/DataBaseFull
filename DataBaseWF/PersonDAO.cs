@@ -11,7 +11,7 @@ namespace DataBaseWF
 {
     public class PersonDAO
     {
-        IPersonDAO db = null;
+        IPersonPhoneDAO db = null;
 
         public void SetDataBase(string type)
         {
@@ -36,6 +36,27 @@ namespace DataBaseWF
         public List<Person> Read()
         {
             return db.Read();
+        }
+
+        public void AddPhone(Person person, Phone phone)
+        {
+            db.AddPhone(person, phone);
+        }
+
+        public void DeletePhone(Person person, Phone phone)
+        {
+            db.DeletePhone(person, phone);
+        }
+
+        public void UpdatePhone(Person person, Phone phone)
+        {
+            db.UpdatePhone(person, phone);
+        }
+
+
+        public Person ReadPerson(int id)
+        {
+            return db.ReadById(id);
         }
 
         public void Update(Person person)
