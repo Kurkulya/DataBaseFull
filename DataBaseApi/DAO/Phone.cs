@@ -11,16 +11,19 @@ namespace DataBaseApi
         public int Id { get; set; }
 
         public string Number { get; set; }
+        public int PersonId { get; set; }
 
-        public Phone(string number)
+        public Phone(string number, int personId)
         {
             Number = number;
+            PersonId = personId;
         }
 
-        public Phone(int id, string number)
+        public Phone(int id, string number, int personId)
         {
             Id = id;
             Number = number;
+            PersonId = personId;
         }
     }
 }

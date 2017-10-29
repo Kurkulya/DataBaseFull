@@ -17,8 +17,8 @@ namespace DataBaseApi
     public interface IPersonPhoneDAO : IPersonDAO
     {
         Person ReadById(int id);
-        void UpdatePhone(Person person, Phone phone);
-        void DeletePhone(Person person, Phone phone);
-        void AddPhone(Person person, Phone phone);
+        void UpdatePhone(Phone phone);
+        void DeletePhone(Phone phone);
+        void AddPhone(Phone phone);
     }
 }

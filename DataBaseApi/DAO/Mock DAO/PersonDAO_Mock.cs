@@ -29,11 +29,13 @@ namespace DataBaseApi
         }
 
         Dictionary<int, Data> people;
+        Dictionary<Phone, int> phones;
 
         public PersonDAO_Mock()
         {
             people = new Dictionary<int, Data>();
- 
+            phones = new Dictionary<Phone, int>();
+
             people.Add(1, new Data("Hermione", "Granger", 21));
             people.Add(2, new Data("Ron", "Weasley", 22));
             people.Add(10, new Data("Lord", "Voldemort", 112));
@@ -58,8 +60,6 @@ namespace DataBaseApi
             {
                 persons.Add(new Person(p.Key, p.Value.fn, p.Value.ln, p.Value.age));
             }
-
-
             return persons;
         }
 
@@ -73,24 +73,24 @@ namespace DataBaseApi
         public Person ReadById(int id)
         {
             Person person = new Person(id, people[id].fn, people[id].ln, people[id].age);
-            person.Phones = people[id].phones;
+            person.Phones = phones.Where(x => x.Value == id).Select(x => x.Key).ToList();
             return person;
         }
 
-        public void UpdatePhone(Person person, Phone phone)
+        public void UpdatePhone(Phone phone)
         {
-            people[person.Id].phones.FirstOrDefault(x => x.Id == phone.Id).Number = phone.Number;
+            phones.Keys.FirstOrDefault(x => x.Id == phone.Id).Number = phone.Number;
         }
 
-        public void DeletePhone(Person person, Phone phone)
+        public void DeletePhone(Phone phone)
         {
-            people[person.Id].phones.RemoveAll(x => x.Number == phone.Number);
+            phones.Remove(phones.FirstOrDefault(x => x.Key.Id == phone.Id).Key);
         }
 
-        public void AddPhone(Person person, Phone phone)
+        public void AddPhone(Phone phone)
         {
-            phone.Id = people[person.Id].phones.Count;
-            people[person.Id].phones.Add(phone);
+            phone.Id = phones.Count;
+            phones.Add(phone, phone.PersonId);
         }
     }
 }

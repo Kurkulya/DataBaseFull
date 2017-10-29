@@ -42,7 +42,7 @@ namespace DataBaseWF
 
         private void CreatePhoneButton_Click(object sender, EventArgs e)
         {
-            dgFormer.AddPhone(new Phone(phoneTextBox.Text));
+            dgFormer.AddPhone(new Phone(phoneTextBox.Text, Convert.ToInt32(idLabel.Text)));
         }
 
         private void updateButton_Click(object sender, EventArgs e)

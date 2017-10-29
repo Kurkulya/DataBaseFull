@@ -38,7 +38,7 @@ namespace DataBaseApi
             List<Phone> phones = new List<Phone>();
             while (rs.next())
             {
-                phones.Add(new Phone(rs.getInt("ID"), rs.getString("PHONE")));
+                phones.Add(new Phone(rs.getInt("ID"), rs.getString("PHONE"), rs.getInt("PERSON_ID")));
             }
             rs.close();
             return phones;

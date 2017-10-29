@@ -78,7 +78,7 @@ namespace DataBaseApi.Api.LibraryFiles_DAO
             return person;
         }
 
-        public void UpdatePhone(Person person, Phone phone)
+        public void UpdatePhone(Phone phone)
         {
             OpenConnection();
             string cmd =
@@ -89,7 +89,7 @@ namespace DataBaseApi.Api.LibraryFiles_DAO
             CloseConnection();
         }
 
-        public void DeletePhone(Person person, Phone phone)
+        public void DeletePhone(Phone phone)
         {
             OpenConnection();
             string cmd =
@@ -99,12 +99,12 @@ namespace DataBaseApi.Api.LibraryFiles_DAO
             CloseConnection();
         }
 
-        public void AddPhone(Person person, Phone phone)
+        public void AddPhone(Phone phone)
         {
             OpenConnection();
             string cmd =
                 $"INSERT INTO {phoneTable} (Phone, Person_Id) " +
-                $"VALUES ('{phone.Number}', {person.Id})";
+                $"VALUES ('{phone.Number}', {phone.PersonId})";
             ExecuteCommand(cmd);
             CloseConnection();
         }

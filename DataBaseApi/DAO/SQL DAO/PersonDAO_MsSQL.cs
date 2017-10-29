@@ -58,7 +58,7 @@ namespace DataBaseApi
             List<Phone> phones = new List<Phone>();
             while (phoneReader.Read())
             {
-                phones.Add(new Phone(phoneReader.GetInt32(0), phoneReader.GetString(1)));
+                phones.Add(new Phone(phoneReader.GetInt32(0), phoneReader.GetString(1), phoneReader.GetInt32(2)));
             }
             phoneReader.Close();
             return phones;

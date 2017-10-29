@@ -38,19 +38,19 @@ namespace DataBaseWF
             return db.Read();
         }
 
-        public void AddPhone(Person person, Phone phone)
+        public void AddPhone(Phone phone)
         {
-            db.AddPhone(person, phone);
+            db.AddPhone(phone);
         }
 
-        public void DeletePhone(Person person, Phone phone)
+        public void DeletePhone(Phone phone)
         {
-            db.DeletePhone(person, phone);
+            db.DeletePhone(phone);
         }
 
-        public void UpdatePhone(Person person, Phone phone)
+        public void UpdatePhone(Phone phone)
         {
-            db.UpdatePhone(person, phone);
+            db.UpdatePhone(phone);
         }
 
 

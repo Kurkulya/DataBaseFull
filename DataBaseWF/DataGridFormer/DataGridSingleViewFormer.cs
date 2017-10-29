@@ -34,7 +34,7 @@ namespace DataBaseWF
                     DataGridViewRow row = dataGrid.Rows[e.RowIndex];
                     if (buttonCell.Text == deleteColumnText)
                     {
-                        Dao.DeletePhone(Person, Person.Phones[e.RowIndex]);
+                        Dao.DeletePhone(Person.Phones[e.RowIndex]);
                         UpdateTable();
                     }
                     else if (buttonCell.Text == editColumnText)
@@ -42,7 +42,7 @@ namespace DataBaseWF
                         UpdatePhoneForm updForm = new UpdatePhoneForm(Person.Phones[e.RowIndex].Number);
                         updForm.ShowDialog();
                         Person.Phones[e.RowIndex].Number = updForm.Phone;
-                        Dao.UpdatePhone(Person, Person.Phones[e.RowIndex]);
+                        Dao.UpdatePhone(Person.Phones[e.RowIndex]);
                         UpdateTable();
                     }
                 }
@@ -57,7 +57,7 @@ namespace DataBaseWF
 
         internal void AddPhone(Phone phone)
         {
-            Dao.AddPhone(Person, phone);
+            Dao.AddPhone(phone);
             UpdateTable();
         }
 
