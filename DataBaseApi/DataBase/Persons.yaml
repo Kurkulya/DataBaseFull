@@ -1,21 +1,27 @@
-Persons:
-- Id: 1
-FirstName: sds
-LastName: sds
-Age: 3
-- Id: 2
-FirstName: aa
-LastName: aa
-Age: 11
-- Id: 4
-FirstName: sds
-LastName: sds
-Age: 3
-- Id: 5
-FirstName: w
-LastName: w
-Age: 1
-- Id: 6
-FirstName: sd
-LastName: sd
-Age: 2
+- Id: 1 
+	FirstName: asdasd 
+	LastName: dasda 
+	Age: 31231 
+	Phones: 
+	- PhoneId: 1 
+		Number: 2 
+		PersonId: 1 
+	- PhoneId: 2 
+		Number: 3 
+		PersonId: 1 
+	- PhoneId: 3 
+		Number: 5 
+		PersonId: 1 
+	- PhoneId: 4 
+		Number: 6 
+		PersonId: 1 
+	- PhoneId: 5 
+		Number: 7 
+		PersonId: 1 
+
+- Id: 2 
+	FirstName: Oppa 
+	LastName: Chirik 
+	Age: 228 
+	Phones: 
+

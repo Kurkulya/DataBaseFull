@@ -23,27 +23,30 @@ namespace DataBaseApi
                 fs = File.Create(path);
                 fs.Close();
             }
-            string[] lines = File.ReadAllLines(path);
-            string[] YAMLlines = new string[(lines.Length - 1) / 4];
-            for (int i = 1, k = 1; i < lines.Length; i++)
+            List<string> lines = File.ReadAllLines(path).ToList();
+            string request = "";
+            foreach (string line in lines)
             {
-                if (i != 4 * k + 1)
-                    YAMLlines[k - 1] += lines[i] + "\n";
-                else
-                    YAMLlines[++k - 1] += lines[i] + "\n";
+                if (line.StartsWith("- Id:"))
+                {
+                    if (request != "")
+                    {
+                        people.Add(FromYAML(request));
+                        request = "";
+                    }
+                }
+                request += line;
             }
-            foreach (string str in YAMLlines)
-            {
-                people.Add(FromYAML(str));
-            }
-            return people;
 
+            if (request != "")
+                people.Add(FromYAML(request));
+
+            return people;
         }
 
         protected override void Write(List<Person> people)
         {
             StreamWriter file = new StreamWriter(path);
-            file.WriteLine("Persons:");
             foreach (Person person in people)
             {
                 file.WriteLine(ToYAML(person));
@@ -55,20 +58,47 @@ namespace DataBaseApi
         private string ToYAML(Person person)
         {
             string str = "";
-            str += $"- Id: {person.Id}";
-            str += $"\nFirstName: {person.FirstName}";
-            str += $"\nLastName: {person.LastName}";
-            str += $"\nAge: {person.Age}";
+            str += $"- Id: {person.Id} \n";
+            str += $"\tFirstName: {person.FirstName} \n";
+            str += $"\tLastName: {person.LastName} \n";
+            str += $"\tAge: {person.Age} \n";
+            str += $"\tPhones: \n";
+            foreach (Phone phone in person.Phones)
+            {
+                str += $"\t- PhoneId: {phone.Id} \n";
+                str += $"\t\tNumber: {phone.Number} \n";
+                str += $"\t\tPersonId: {phone.PersonId} \n";
+            }
             return str;
         }
         private Person FromYAML(string yaml_string)
         {
             Person person = new Person();
-            string[] args = yaml_string.Split('\n', ':', '-');
-            person.Id = Int32.Parse(args[2].Trim());
-            person.FirstName = args[4].Trim();
-            person.LastName = args[6].Trim();
-            person.Age = Int32.Parse(args[8].Trim());
+            Phone phone = null;
+            List<string> args = yaml_string.Replace("\t", "").Split('-', ' ').ToList();
+            args.RemoveAll(x => x == "");
+            person.Id = Int32.Parse(args[1].Trim());
+            person.FirstName = args[3].Trim();
+            person.LastName = args[5].Trim();
+            person.Age = Int32.Parse(args[7].Trim());
+            args.RemoveRange(0, 9);
+            for (int i = 0; i < args.Count; i+=2)
+            {
+                if(args[i] == "PhoneId:")
+                {
+                    phone = new Phone();
+                    phone.Id = Int32.Parse(args[i + 1].Trim());
+                }
+                else if(args[i] == "Number:")
+                {
+                    phone.Number = args[i + 1].Trim();
+                }
+                else if (args[i] == "PersonId:")
+                {
+                    phone.PersonId = Int32.Parse(args[i + 1].Trim());
+                    person.Phones.Add(phone);
+                }
+            }           
             return person;
         }
 
