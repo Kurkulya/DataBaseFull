@@ -24,20 +24,25 @@ namespace DataBaseApi
                 fs.Close();
             }
             string[] lines = File.ReadAllLines(path);
-            string[] XMLlines = new string[(lines.Length - 2) / 6];
-            for (int i = 1, k = 0; i < lines.Length - 1; i++)
+            bool read = false;
+            string request = "";
+            foreach(string line in lines)
             {
-                if (lines[i] == "\t</Person>")
-                    k++;
-                else if (lines[i] != "\t<Person>")
-                    XMLlines[k] += lines[i];
-            }
-            foreach (string line in XMLlines)
-            {
-                people.Add(FromXML(line));
-            }
-            return people;
+                if (read == true)
+                    request += line;
 
+                if (line == "\t<Person>")
+                {
+                    read = true;
+                }
+                else if (line == "\t</Person>")
+                {
+                    read = false;
+                    people.Add(FromXML(request));
+                    request = "";
+                }
+            }            
+            return people;
         }
    
 
@@ -61,18 +66,49 @@ namespace DataBaseApi
             str += $"\t\t<FirstName>{person.FirstName}</FirstName>\n";
             str += $"\t\t<LastName>{person.LastName}</LastName>\n";
             str += $"\t\t<Age>{person.Age}</Age>\n";
+            str += "\t\t<Phones>\n";
+            foreach (Phone phone in person.Phones)
+            {
+                str += "\t\t\t<Phone>\n";
+                str += $"\t\t\t\t<Id>{phone.Id}</Id>\n";
+                str += $"\t\t\t\t<Number>{phone.Number}</Number>\n";
+                str += $"\t\t\t\t<PersonId>{phone.PersonId}</PersonId>\n";
+                str += "\t\t\t</Phone>\n";
+            }
+            str += "\t\t</Phones>\n";
             str += "\t</Person>";
             return str;
         }
         private Person FromXML(string str)
         {
             Person person = new Person();
+            Phone phone = null;
             str = str.Replace("\t", "");
-            string[] args = str.Split('<', '>');
-            person.Id = Int32.Parse(args[2]);
-            person.FirstName = args[6];
-            person.LastName = args[10];
-            person.Age = Int32.Parse(args[14]);
+            List<string> strings = str.Split('<', '>').ToList();
+            strings.RemoveAll(x => x == "");
+            person.Id = Int32.Parse(strings[1]);
+            person.FirstName = strings[4];
+            person.LastName = strings[7];
+            person.Age = Int32.Parse(strings[10]);
+            strings.RemoveRange(0, 14);
+            strings.RemoveAll(x => x == "/Phone" || x == "Phone" || x == "/Phones" || x == "/Person");
+            for (int i = 0; i < strings.Count; i+=3)
+            {
+                if(strings[i] == "Id")
+                {
+                    phone = new Phone();
+                    phone.Id = Convert.ToInt32(strings[i + 1]);
+                }
+                else if(strings[i] == "Number")
+                {
+                    phone.Number = strings[i + 1];
+                }
+                else if(strings[i] == "PersonId")
+                {
+                    phone.PersonId = Convert.ToInt32(strings[i + 1]);
+                    person.Phones.Add(phone);
+                }
+            }
             return person;
         }
 

@@ -15,13 +15,13 @@ namespace DataBaseApi
             switch(type)
             {
                 case "MS SQL": db = new PersonDAO_MsSQL(); break;
-                //case "MY SQL": db = new PersonDAO_MySQL(); break;
-                //case "H2": db = new PersonDAO_H2(); break;
-                //case "MONGODB": db = new PersonDAO_MONGODB(); break;
-                //case "CSV": db = new PersonDAO_CSV(); break;
+                case "MY SQL": db = new PersonDAO_MySQL(); break;
+                case "H2": db = new PersonDAO_H2(); break;
+                case "MONGODB": db = new PersonDAO_MONGODB(); break;
+                case "CSV": db = new PersonDAO_CSV(); break;
                 case "JSON": db = new PersonDAO_JSON(); break;
-                //case "XML": db = new PersonDAO_XML(); break;
-                //case "YAML": db = new PersonDAO_YAML(); break;
+                case "XML": db = new PersonDAO_XML(); break;
+                case "YAML": db = new PersonDAO_YAML(); break;
                 case "CSV_L": db = new PersonDAO_CSV_L(); break;
                 case "JSON_L": db = new PersonDAO_JSON_L(); break;
                 case "XML_L": db = new PersonDAO_XML_L(); break;
