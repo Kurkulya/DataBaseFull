@@ -32,10 +32,11 @@ namespace DataBaseApi
             while (i < line.Length)
             {
                 string str = "";
-                while (line.ElementAt(i) != '}')
+                while (line.ElementAt(i) != ']')
                 {
                     str += line.ElementAt(i++);
                 }
+                str += line.ElementAt(i++);
                 str += line.ElementAt(i++);
                 i++;
                 people.Add(FromJSON(str));
@@ -69,9 +70,12 @@ namespace DataBaseApi
             foreach(Phone phone in person.Phones)
             {
                 str += "{";
-                str += $"Phones : [";
-                str += "}";
+                str += $"Id: {phone.Id},";
+                str += $"Number: {phone.Number},";
+                str += $"PersonId: {phone.PersonId}";
+                str += "},";
             }
+            str.TrimEnd(',');
             str += $"]";
             str += "}";
             return str;
@@ -79,11 +83,39 @@ namespace DataBaseApi
         private Person FromJSON(string json_string)
         {
             Person person = new Person();
-            string[] args = json_string.Split(':', ',', '}');
-            person.Id = Int32.Parse(args[1].Trim());
-            person.FirstName = args[3].Trim();
-            person.LastName = args[5].Trim();
-            person.Age = Int32.Parse(args[7].Trim());
+            Phone phone = null;
+            bool phones = false;
+            string[] args = json_string.Split(',', '}', '{',']');
+            foreach(string str in args)
+            {
+                if(str != "")
+                {
+                    string[] keyVal = str.Split(':');
+                    keyVal = keyVal.Select(x => x.Trim()).ToArray();
+                    if (phones == false)
+                    {
+                        switch (keyVal[0])
+                        {
+                            case "Id": person.Id = Convert.ToInt32(keyVal[1]); break;
+                            case "FirstName": person.FirstName = keyVal[1]; break;
+                            case "LastName": person.LastName = keyVal[1]; break;
+                            case "Age": person.Age = Convert.ToInt32(keyVal[1]); break;
+                            case "Phones": phones = true; break;
+                        }
+                    }
+                    else
+                    {                      
+                        switch (keyVal[0])
+                        {
+                            case "Id":          phone = new Phone();
+                                                phone.Id = Convert.ToInt32(keyVal[1]); break;
+                            case "Number":      phone.Number = keyVal[1]; break;
+                            case "PersonId":    phone.PersonId = Convert.ToInt32(keyVal[1]);
+                                                person.Phones.Add(phone); break;
+                        }
+                    }
+                }
+            }
             return person;
         }
 

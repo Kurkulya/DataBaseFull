@@ -22,7 +22,7 @@ namespace DataBaseWF
             dgFormer.FormTable();
             dgFormer.UpdateTable();
 
-            string[] databases = { "MOCK", "MS SQL", "BIN_L", "CSV_L", "JSON_L", "XML_L", "YAML_L" };
+            string[] databases = { "MOCK", "MS SQL", "BIN_L", "CSV_L", "JSON_L", "XML_L", "YAML_L", "JSON" };
             foreach(string db in databases)
             {
                 databaseComboBox.Items.Add(db);
