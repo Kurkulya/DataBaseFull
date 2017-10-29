@@ -26,7 +26,7 @@ namespace DataBaseApi
                 case "JSON_L": db = new PersonDAO_JSON_L(); break;
                 case "XML_L": db = new PersonDAO_XML_L(); break;
                 case "YAML_L": db = new PersonDAO_YAML_L(); break;
-                //case "MS SQL EF": db = new PersonDAO_EF(); break;
+                case "MS SQL EF": db = new PersonDAO_EF(); break;
                 //case "BIN": db = new PersonDAO_Binary(); break;
                 case "BIN_L": db = new PersonDAO_Binary_L(); break;
                 case "MOCK": db = new PersonDAO_Mock(); break;
