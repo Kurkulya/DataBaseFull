@@ -14,6 +14,8 @@ namespace DataBaseWF
         string deleteColumnText = "X";
         string editColumnText = "->";
 
+        public enum SearchBy {ById, ByFirstName, ByLastName, ByAge }
+
         public DataGridManyViewFormer(DataGridView dataGrid) : base(dataGrid)
         {
             this.dataGrid = dataGrid;
@@ -60,6 +62,28 @@ namespace DataBaseWF
             AddButtonColumn(editColumnText, Width.Small);
             AddButtonColumn(deleteColumnText, Width.Small);       
         }
+
+        public void SearchPersons(SearchBy criteria, string text)
+        {
+            List<Person> people = Dao.Read();
+            List<Person> find = null;
+
+            if(criteria == SearchBy.ById)
+                find = people.Where(x => x.Id.ToString().Contains(text)).ToList();
+            else if(criteria == SearchBy.ByFirstName)
+                find = people.Where(x => x.FirstName.Contains(text)).ToList();
+            else if (criteria == SearchBy.ByLastName)
+                find = people.Where(x => x.LastName.Contains(text)).ToList();
+            else if (criteria == SearchBy.ByAge)
+                find = people.Where(x => x.Age.ToString().Contains(text)).ToList();
+
+            dataGrid.Rows.Clear();
+            foreach (Person person in find)
+            {
+                dataGrid.Rows.Add(person.Id, person.FirstName, person.LastName, person.Age);
+            }
+        }
+
         public void UpdateTable()
         {
             List<Person> people = Dao.Read();

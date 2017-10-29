@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DataBaseWF.DataGridManyViewFormer;
 
 namespace DataBaseWF
 {
@@ -29,7 +30,7 @@ namespace DataBaseWF
                 databaseComboBox.Items.Add(db);
             }
             databaseComboBox.SelectedIndex = 0;
-
+            searchComboBox.SelectedIndex = 0;
             
         }
 
@@ -45,6 +46,19 @@ namespace DataBaseWF
             cpForm.ShowDialog();
             if (cpForm.Person != null)
                 dgFormer.CreatePerson(cpForm.Person);
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            SearchBy criteria = SearchBy.ByFirstName;
+            switch(searchComboBox.SelectedItem.ToString())
+            {
+                case "By Id": criteria = SearchBy.ById; break;
+                case "By First Name": criteria = SearchBy.ByFirstName; break;
+                case "By Last Name": criteria = SearchBy.ByLastName; break;
+                case "By Age": criteria = SearchBy.ByAge; break;
+            }
+            dgFormer.SearchPersons(criteria, searchTextBox.Text);
         }
     }
 }

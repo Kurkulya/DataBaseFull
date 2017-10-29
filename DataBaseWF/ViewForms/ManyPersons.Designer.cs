@@ -33,6 +33,7 @@
             this.dataGridMany = new System.Windows.Forms.DataGridView();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
+            this.searchComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridMany)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,23 +68,38 @@
             // 
             this.searchTextBox.Location = new System.Drawing.Point(12, 12);
             this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(395, 20);
+            this.searchTextBox.Size = new System.Drawing.Size(276, 20);
             this.searchTextBox.TabIndex = 15;
             // 
             // searchButton
             // 
-            this.searchButton.Location = new System.Drawing.Point(413, 10);
+            this.searchButton.Location = new System.Drawing.Point(413, 11);
             this.searchButton.Name = "searchButton";
             this.searchButton.Size = new System.Drawing.Size(58, 23);
             this.searchButton.TabIndex = 16;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // searchComboBox
+            // 
+            this.searchComboBox.FormattingEnabled = true;
+            this.searchComboBox.Items.AddRange(new object[] {
+            "By Id",
+            "By First Name",
+            "By Last Name",
+            "By Age"});
+            this.searchComboBox.Location = new System.Drawing.Point(297, 12);
+            this.searchComboBox.Name = "searchComboBox";
+            this.searchComboBox.Size = new System.Drawing.Size(110, 21);
+            this.searchComboBox.TabIndex = 17;
             // 
             // ManyPersons
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 524);
+            this.Controls.Add(this.searchComboBox);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.dataGridMany);
@@ -103,6 +119,7 @@
         private System.Windows.Forms.DataGridView dataGridMany;
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.ComboBox searchComboBox;
     }
 }
 
