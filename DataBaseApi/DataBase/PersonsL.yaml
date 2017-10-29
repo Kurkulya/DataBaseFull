@@ -1,4 +1,17 @@
-- Id: 2
-  FirstName: sd
-  LastName: sd
-  Age: 23
+- Id: 1
+  FirstName: a
+  LastName: a
+  Age: 21
+  Phones:
+  - Id: 1
+    Number: 2
+    PersonId: 1
+  - Id: 2
+    Number: 3
+    PersonId: 1
+  - Id: 3
+    Number: 4
+    PersonId: 1
+  - Id: 4
+    Number: 5
+    PersonId: 1

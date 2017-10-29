@@ -1,5 +1,2 @@
-Id,FirstName,LastName,Age
-1,sd,sd,23
-2,sd,sd,23
-3,a,a,2
-4,sd,sd,23
+Id,FirstName,LastName,Age,Phones
+1,B,B,3,"[{Id:0,Number:123,PersonId:1},{Id:2,Number:33333,PersonId:1},{Id:3,Number:4,PersonId:1}]"

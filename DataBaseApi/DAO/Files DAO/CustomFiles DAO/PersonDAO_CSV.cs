@@ -10,7 +10,7 @@ namespace DataBaseApi
 {
     class PersonDAO_CSV : PersonDAO_Files
     {
-        public PersonDAO_CSV() : base(@"E:\C# 1708\DataBase\DataBaseApi\DataBase\Persons.csv")
+        public PersonDAO_CSV() : base(@"E:\ORT_1708\C#\Data Bases\DataBase\DataBaseApi\DataBase\Persons.csv")
         {
         }
 

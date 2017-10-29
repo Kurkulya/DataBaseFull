@@ -10,7 +10,7 @@ namespace DataBaseApi
 {
     class PersonDAO_YAML : PersonDAO_Files
     {
-        public PersonDAO_YAML() : base(@"E:\C# 1708\DataBase\DataBaseApi\DataBase\Persons.yaml")
+        public PersonDAO_YAML() : base(@"E:\ORT_1708\C#\Data Bases\DataBase\DataBaseApi\DataBase\Persons.yaml")
         {
         }
 

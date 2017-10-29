@@ -25,8 +25,9 @@ namespace DataBaseApi
 
         public void AddPhone(Phone phone)
         {
-            if (phones.Find(x => x.Id == phone.Id).ToList().Count == 0)
-                phones.InsertOne(phone);
+            List<Phone> phoneList = phones.Find(x => true).ToList();
+            phone.Id = (phoneList.Count == 0) ? 0 : phoneList.Max(x => x.Id) + 1;
+            phones.InsertOne(phone);
         }
 
         public void Create(Person person)

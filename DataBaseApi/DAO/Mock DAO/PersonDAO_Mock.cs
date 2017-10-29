@@ -89,7 +89,7 @@ namespace DataBaseApi
 
         public void AddPhone(Phone phone)
         {
-            phone.Id = phones.Count;
+            phone.Id = (phones.Count == 0) ? 0 : phones.Max(x => x.Key.Id) + 1;
             phones.Add(phone, phone.PersonId);
         }
     }

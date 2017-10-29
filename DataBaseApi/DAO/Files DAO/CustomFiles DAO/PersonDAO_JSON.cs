@@ -10,7 +10,7 @@ namespace DataBaseApi
 {
     class PersonDAO_JSON : PersonDAO_Files
     {
-        public PersonDAO_JSON() : base(@"E:\C# 1708\DataBase\DataBaseApi\DataBase\Persons.json")
+        public PersonDAO_JSON() : base(@"E:\ORT_1708\C#\Data Bases\DataBase\DataBaseApi\DataBase\Persons.json")
         {
         }
       
@@ -64,7 +64,15 @@ namespace DataBaseApi
             str += $"Id: {person.Id},";
             str += $"FirstName: {person.FirstName},";
             str += $"LastName: {person.LastName},";
-            str += $"Age: {person.Age}";
+            str += $"Age: {person.Age},";
+            str += $"Phones : [";
+            foreach(Phone phone in person.Phones)
+            {
+                str += "{";
+                str += $"Phones : [";
+                str += "}";
+            }
+            str += $"]";
             str += "}";
             return str;
         }

@@ -22,13 +22,13 @@ namespace DataBaseApi
                 //case "JSON": db = new PersonDAO_JSON(); break;
                 //case "XML": db = new PersonDAO_XML(); break;
                 //case "YAML": db = new PersonDAO_YAML(); break;
-                //case "CSV_L": db = new PersonDAO_CSV_L(); break;
-                //case "JSON_L": db = new PersonDAO_JSON_L(); break;
-                //case "XML_L": db = new PersonDAO_XML_L(); break;
-                //case "YAML_L": db = new PersonDAO_YAML_L(); break;
+                case "CSV_L": db = new PersonDAO_CSV_L(); break;
+                case "JSON_L": db = new PersonDAO_JSON_L(); break;
+                case "XML_L": db = new PersonDAO_XML_L(); break;
+                case "YAML_L": db = new PersonDAO_YAML_L(); break;
                 //case "MS SQL EF": db = new PersonDAO_EF(); break;
                 //case "BIN": db = new PersonDAO_Binary(); break;
-                //case "BIN_L": db = new PersonDAO_Binary_L(); break;
+                case "BIN_L": db = new PersonDAO_Binary_L(); break;
                 case "MOCK": db = new PersonDAO_Mock(); break;
             }
 

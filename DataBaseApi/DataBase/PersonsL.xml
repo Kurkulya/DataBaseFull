@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfPerson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Person>
+    <Id>1</Id>
+    <FirstName>A</FirstName>
+    <LastName>A</LastName>
+    <Age>1</Age>
+    <Phones />
+  </Person>
+  <Person>
     <Id>2</Id>
-    <FirstName>a</FirstName>
-    <LastName>a</LastName>
+    <FirstName>C</FirstName>
+    <LastName>C</LastName>
     <Age>2</Age>
+    <Phones>
+      <Phone>
+        <Id>0</Id>
+        <Number>0</Number>
+        <PersonId>2</PersonId>
+      </Phone>
+      <Phone>
+        <Id>1</Id>
+        <Number>2</Number>
+        <PersonId>2</PersonId>
+      </Phone>
+      <Phone>
+        <Id>3</Id>
+        <Number>4</Number>
+        <PersonId>2</PersonId>
+      </Phone>
+    </Phones>
   </Person>
   <Person>
     <Id>3</Id>
-    <FirstName>a</FirstName>
-    <LastName>a</LastName>
-    <Age>2</Age>
-  </Person>
-  <Person>
-    <Id>4</Id>
-    <FirstName>sd</FirstName>
-    <LastName>sd</LastName>
-    <Age>23</Age>
-  </Person>
-  <Person>
-    <Id>5</Id>
-    <FirstName>sd</FirstName>
-    <LastName>sd</LastName>
-    <Age>23</Age>
+    <FirstName>B</FirstName>
+    <LastName>B</LastName>
+    <Age>3</Age>
+    <Phones />
   </Person>
 </ArrayOfPerson>
