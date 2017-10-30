@@ -29,7 +29,6 @@ namespace DataBaseWF
         private void FillFields()
         {
             person = dgFormer.Person;
-            idLabel.Text = person.Id.ToString();
             mainIdLabel.Text = person.Id.ToString();
             fnLabel.Text = person.FirstName;
             lnLabel.Text = person.LastName;
@@ -42,12 +41,12 @@ namespace DataBaseWF
 
         private void CreatePhoneButton_Click(object sender, EventArgs e)
         {
-            dgFormer.AddPhone(new Phone(phoneTextBox.Text, Convert.ToInt32(idLabel.Text)));
+            dgFormer.AddPhone(new Phone(phoneTextBox.Text, Convert.ToInt32(mainIdLabel.Text)));
         }
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            dgFormer.UpdatePerson(new Person(Convert.ToInt32(idLabel.Text),fnTextBox.Text,
+            dgFormer.UpdatePerson(new Person(Convert.ToInt32(mainIdLabel.Text),fnTextBox.Text,
                 lnTextBox.Text, Convert.ToInt32(ageTextBox.Text)));
             FillFields();
         }

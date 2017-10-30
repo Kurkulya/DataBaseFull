@@ -1,6 +1,7 @@
 ﻿using DataBaseApi;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace DataBaseWF
             column.Name = name;
             column.Width = (int)width;
             column.HeaderText = text;
+            column.DefaultCellStyle.Font = new Font("Times New Roman", 8);
             column.CellTemplate = new DataGridViewTextBoxCell();
             dataGrid.Columns.Add(column);
         }
@@ -34,6 +36,7 @@ namespace DataBaseWF
             DataGridViewButtonColumn btn = new DataGridViewButtonColumn();       
             btn.Width = (int)width;
             btn.Text = text;
+            btn.DefaultCellStyle.Font = new Font("Times New Roman", 8);
             btn.UseColumnTextForButtonValue = true;
             dataGrid.Columns.Add(btn);
         }    
